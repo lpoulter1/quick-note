@@ -19,7 +19,7 @@ function App() {
   }, []);
 
   return (
-    <main>
+    <main className="bg-pink-300">
       <TodoList todos={todos} />
     </main>
   );
