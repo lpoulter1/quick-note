@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { type Todo } from "../../sharedTypes";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
