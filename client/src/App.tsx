@@ -35,7 +35,7 @@ function AddTodo() {
 
   const mutation = useMutation({
     mutationFn: (newTodo: NewTodo) => {
-      return axios.post("http://localhost:3000/todos", newTodo);
+      return axios.post(`http://localhost:3000/todos`, newTodo);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
