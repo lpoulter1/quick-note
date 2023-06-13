@@ -1,22 +1,19 @@
-import { useEffect, useState } from "react";
 import { TodoList } from "./TodoList";
+import { useFetchTodos } from "./useFetchTodos";
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const { isLoading, error, data: todos } = useFetchTodos();
 
-  useEffect(() => {
-    // declare the data fetching function
-    const fetchData = async () => {
-      const data = await fetch("http://localhost:3000/todos");
-      const todos = await data.json();
-      setTodos(todos);
-    };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
-    // call the function
-    fetchData()
-      // make sure to catch any error
-      .catch(console.error);
-  }, []);
+  if (!todos) {
+    return <div>No todos</div>;
+  }
 
   return (
     <main className="bg-pink-300">
