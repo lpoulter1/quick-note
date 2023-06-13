@@ -1,8 +1,4 @@
-type Todo = {
-  id: string;
-  title: string;
-  description: string;
-};
+import { type Todo } from "../../sharedTypes";
 
 export function TodoList({ todos }: { todos: Todo[] }) {
   return (

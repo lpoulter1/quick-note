@@ -1,10 +1,5 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-
-type Todo = {
-  id: string;
-  title: string;
-  description: string;
-};
+import { type Todo } from "../../sharedTypes";
 
 type QueryData = Todo[];
 

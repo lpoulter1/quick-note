@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { TodoList } from "./TodoList";
 import { useFetchTodos } from "./useFetchTodos";
 import axios from "axios";
+import { type Todo } from "../../sharedTypes";
 
 function App() {
   const { isLoading, error, data: todos } = useFetchTodos();
@@ -26,10 +27,7 @@ function App() {
   );
 }
 
-type NewTodo = {
-  title: string;
-  description: string;
-};
+type NewTodo = Omit<Todo, "id" | "done">;
 
 function AddTodo() {
   // add react query mutation to p
