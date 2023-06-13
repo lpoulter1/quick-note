@@ -12,7 +12,7 @@ export function useFetchTodos(): UseQueryResult<QueryData, unknown> {
   const url = "http://localhost:3000/todos";
 
   return useQuery<QueryData, unknown>({
-    queryKey: ["repositories"],
+    queryKey: ["todos"],
     queryFn: async () => {
       const response = await fetch(url);
 

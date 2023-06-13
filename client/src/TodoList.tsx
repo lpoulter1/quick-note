@@ -6,7 +6,7 @@ type Todo = {
 
 export function TodoList({ todos }: { todos: Todo[] }) {
   return (
-    <div className="bg-pink-300">
+    <div>
       <h1>Todo List</h1>
       {todos.map((todo) => (
         <div key={todo.id}>
