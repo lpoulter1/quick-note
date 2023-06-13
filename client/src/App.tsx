@@ -8,7 +8,7 @@ function App() {
     return <div>Loading...</div>;
   }
   if (error) {
-    return <div>Error: {error.message}</div>;
+    console.error(error);
   }
 
   if (!todos) {
