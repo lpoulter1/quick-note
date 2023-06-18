@@ -21,6 +21,11 @@ async function main() {
     },
   });
 
-  const allUsers = await prisma.todo.findMany();
-  console.log(allUsers);
+  await prisma.todo.create({
+    data: {
+      title: 'Take out bins',
+      description: 'they stink',
+      done: true,
+    },
+  });
 }
