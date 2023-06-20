@@ -1,48 +1,39 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import { type Todo } from '../../../sharedTypes';
-
-const todos: Todo[] = [
-  {
-    id: randomUUID(),
-    title: 'Todo 1',
-    description: 'Description 1',
-    done: false,
-  },
-  {
-    id: randomUUID(),
-    title: 'Todo 2',
-    description: 'Description 2',
-    done: false,
-  },
-  {
-    id: randomUUID(),
-    title: 'Todo 3',
-    description: 'Description done',
-    done: true,
-  },
-];
+// import { type Todo } from '../../../sharedTypes';
+import { TodosService } from './todos.service';
+import { Todo } from '@prisma/client';
 
 @Controller('todos')
 export class TodosController {
+  constructor(private todoService: TodosService) {}
+
   @Get()
   getTodos() {
-    return todos;
+    return this.todoService.findAll();
   }
 
   @Post()
   createTodo(@Body() body: { title: string; description: string }) {
     const newId = randomUUID();
-    return todos.push({ id: newId, done: false, ...body });
+    return this.todoService.create({ id: newId, done: false, ...body });
+  }
+
+  @Delete(':id')
+  deleteTodo(@Param('id') id: string) {
+    return this.todoService.delete(id);
   }
 
   @Patch(':id')
-  updateTodo(
-    @Param('id') id: string,
-    @Body() body: { title: string; description: string; done: boolean },
-  ) {
-    const todoIndex = todos.findIndex((todo) => todo.id === id);
-    todos[todoIndex] = { id, ...body };
-    return todos[todoIndex];
+  updateTodo(@Param('id') id: string, @Body() body: Todo) {
+    return this.todoService.update(id, body);
   }
 }
