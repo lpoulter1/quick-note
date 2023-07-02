@@ -2,10 +2,10 @@ import { type Todo } from "../../sharedTypes";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
-export function TodoList({ todos }: { todos: Todo[] }) {
+export function TodoList({ todos, title }: { todos: Todo[]; title: string }) {
   return (
     <div>
-      <h1>Todo List</h1>
+      <h1 className="text-2xl font-bold">{title}</h1>
       <div className="flex flex-col gap-4">
         {todos.map((todo) => (
           <TodoCard todo={todo} key={todo.id} />
@@ -39,7 +39,7 @@ function TodoCard(props: { todo: Todo }) {
     <div>
       <h2>{title}</h2>
       <p>{description}</p>
-      <p>is done: {done ? "✅" : "❌"}</p>
+      <p>{done ? "✅" : "❌"}</p>
       <input
         type="checkbox"
         checked={done}

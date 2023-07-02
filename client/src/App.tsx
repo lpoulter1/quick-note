@@ -19,10 +19,15 @@ function App() {
     return <div>No todos</div>;
   }
 
+  const completedTodos = todos.filter((todo) => todo.done);
+  const incompleteTodos = todos.filter((todo) => !todo.done);
   return (
     <main className="container mx-auto ">
       <AddTodo />
-      <TodoList todos={todos} />
+
+      <TodoList todos={incompleteTodos} title="Todo" />
+
+      <TodoList todos={completedTodos} title="Done" />
     </main>
   );
 }
